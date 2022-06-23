@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MonkeyFinder2.ViewModel"
+             x:DataType="viewmodel:MonkeyDetailsViewModel"
+             x:Class="MonkeyFinder2.View.DetailsPage"
+             Title="{Binding Monkey.Name}"
+             Shell.PresentationMode="Animated">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid ColumnDefinitions="*,auto,*"
+                  RowDefinitions="125,auto">
+
+                <BoxView BackgroundColor="{StaticResource Primary}"
+                         Grid.ColumnSpan="3"
+                         HeightRequest="125"
+                         HorizontalOptions="FillAndExpand"/>
+
+                <Frame Grid.RowSpan="2"
+                       Grid.Column="1"
+                       HeightRequest="250"
+                       WidthRequest="250"
+                       CornerRadius="125"
+                       IsClippedToBounds="True"
+                       HorizontalOptions="Center"
+                       Padding="0"
+                       Margin="0,0,0,0">
+                    
+                    <Image Source="{Binding Monkey.Image}"
+                           Aspect="AspectFill"
+                           HeightRequest="250"
+                           WidthRequest="250"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </Frame>
+                       
+            </Grid>
+
+            <Button Text="Show on map"
+                    Command="{Binding OpenMapCommand}"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource ButtonOutline}"
+                    WidthRequest="200"
+                    Margin="8"/>
+
+            <VerticalStackLayout Padding="10" Spacing="10">
+                <Label Text="{Binding Monkey.Details}"
+                       Style="{StaticResource MediumLabel}"/>
+                <Label Text="{Binding Monkey.Location, StringFormat='Location: {0}'}"
+                       Style="{StaticResource SmallLabel}"/>
+                <Label Text="{Binding Monkey.Population, StringFormat='Population: {0}'}"
+                       Style="{StaticResource SmallLabel}"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

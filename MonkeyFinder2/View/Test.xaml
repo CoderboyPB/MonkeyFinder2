@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MonkeyFinder2.View.Test"
+             Title="Test">
+    <ContentPage.Resources>
+        <Style TargetType="Entry" x:Key="InvalidEntryStyle">
+            <Setter Property="TextColor" Value="Red"/>
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>       
+    </ContentPage.Resources>
+    
+    <StackLayout Spacing="10">
+        <Entry>
+            <Entry.Behaviors>
+                <toolkit:CharactersValidationBehavior 
+                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                    ValidStyle="{StaticResource ValidEntryStyle}" 
+                    Flags="ValidateOnValueChanged"
+                    CharacterType="Digit"
+                    MinimumCharacterTypeCount="2"/>
+            </Entry.Behaviors>
+        </Entry>
+        <Entry Keyboard="Numeric">
+            <Entry.Behaviors>
+                <toolkit:MaskedBehavior Mask="XXXX XXXX XXXX XXXX" />
+            </Entry.Behaviors>
+        </Entry>
+        <ProgressBar
+            IsVisible="true"
+            Progress="0.25"
+            ProgressColor="Chartreuse"
+            >
+            <ProgressBar.Behaviors>
+                <toolkit:ProgressBarAnimationBehavior
+                    x:Name="ProgressBarAnimationBehavior"
+                    Progress="0.75" 
+                    Length="1000"/>
+            </ProgressBar.Behaviors>
+        </ProgressBar>
+        <Entry>
+            <Entry.Behaviors>
+                <toolkit:RequiredStringValidationBehavior 
+                InvalidStyle="{StaticResource InvalidEntryStyle}"
+                ValidStyle="{StaticResource ValidEntryStyle}"
+                Flags="ValidateOnValueChanged"
+                RequiredString="MAGIC ANSWER" />
+            </Entry.Behaviors>
+        </Entry>
+        <Ellipse WidthRequest="200"
+                 HeightRequest="200">
+            <Ellipse.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="Black"
+                          Offset="0.1" />
+                    <GradientStop Color="Blue"
+                          Offset="1.0" />
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+    </StackLayout>
+</ContentPage>
