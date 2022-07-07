@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="MonkeyFinder2.AppShell"
              xmlns:view="clr-namespace:MonkeyFinder2.View"
+             xmlns:helpers="clr-namespace:MonkeyFinder2.Helpers"
              Title="Monkeys"
-             FlyoutBehavior="Disabled">
-
-
+             x:Name="shell"
+             FlyoutBackgroundColor="Black"
+             FlyoutBehavior="Flyout"
+             FlyoutBackdrop="Purple"
+            FlyoutVerticalScrollMode="Auto"
+            CurrentItem="{x:Reference elephants}"
+       >
 
     <Shell.Resources>
         <ResourceDictionary>
@@ -25,12 +31,130 @@
         </ResourceDictionary>
     </Shell.Resources>
 
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid>
+                <Image Source="gundel.gif"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="0.2*,0.8*">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup>
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Orange"/>
+                                <Setter TargetName="Label" Property="Label.TextColor" Value="Black"/>
+                                <!--<Setter TargetName="Image" Property="" Value="Black" />-->
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Image x:Name="Image"
+                       Source="{Binding FlyoutIcon}"
+                       Margin="5"
+                       HeightRequest="45"/>
+                <Label Text="{Binding Title}"
+                       x:Name="Label"
+                       Grid.Column="1"
+                       FontAttributes="Italic"
+                       VerticalTextAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
 
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <VerticalStackLayout>
+                <Label TextColor="GhostWhite"
+                   HorizontalOptions="Center"
+                   FontSize="24"
+                   Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MMMM dd yyyy}'}"/>
+            </VerticalStackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
 
-    <ShellContent
-        Shell.NavBarIsVisible="true"
-        Title="Monkeys"
-        ContentTemplate="{DataTemplate view:MainPage}"
-        Route="MainPage" />
-
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        
+        <ShellContent Title="Monkeys"
+                          ContentTemplate="{DataTemplate view:Test}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialDesign"
+                                 Color="GhostWhite"
+                                 Glyph="{Static helpers:MaterialIconFont.Facebook}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+        <Tab Title="Domestic">
+            <Tab.Icon>
+                <FontImageSource FontFamily="MaterialDesign"
+                                 Color="GhostWhite"
+                                 Glyph="{Static helpers:MaterialIconFont.Paw}"/>
+            </Tab.Icon>
+            <ShellContent Title="Cats"
+                          ContentTemplate="{DataTemplate view:Test}">
+                <ShellContent.Icon>
+                    <FontImageSource FontFamily="MaterialDesign"
+                                     Glyph="{Static helpers:MaterialIconFont.Cat}"
+                                     Color="GhostWhite"/>
+                </ShellContent.Icon>
+            </ShellContent>
+            <ShellContent Title="Dogs"
+                          ContentTemplate="{DataTemplate view:Test}">
+                <ShellContent.Icon>
+                    <FontImageSource FontFamily="MaterialDesign"
+                                     Color="GhostWhite"
+                                     Glyph="{Static helpers:MaterialIconFont.Dog}"/>
+                </ShellContent.Icon>
+            </ShellContent>
+        </Tab>
+        <ShellContent Title="Elephants"
+                      x:Name="elephants"
+                          ContentTemplate="{DataTemplate view:Test}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialDesign"
+                                 Color="GhostWhite"
+                                 Glyph="{Static helpers:MaterialIconFont.Elephant}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="Bears"
+                          ContentTemplate="{DataTemplate view:Test}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialDesign"
+                                 Color="GhostWhite"
+                                 Glyph="{Static helpers:MaterialIconFont.TeddyBear}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="Birds"
+                          ContentTemplate="{DataTemplate view:Test}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialDesign"
+                                 Color="GhostWhite"
+                                 Glyph="{Static helpers:MaterialIconFont.Bird}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="Fishes"
+                          ContentTemplate="{DataTemplate view:Test}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialDesign"
+                                 Color="GhostWhite"
+                                 Glyph="{Static helpers:MaterialIconFont.Fish}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+    </FlyoutItem>
+    <ShellContent Title="About"
+                  ContentTemplate="{DataTemplate view:Test}">
+        <ShellContent.Icon>
+            <FontImageSource FontFamily="MaterialDesign"
+                             Color="GhostWhite"
+                             Glyph="{Static helpers:MaterialIconFont.Information}"/>
+        </ShellContent.Icon>
+    </ShellContent>
 </Shell>
