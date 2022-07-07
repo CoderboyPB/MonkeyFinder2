@@ -5,6 +5,7 @@
              x:Class="MonkeyFinder2.AppShell"
              xmlns:view="clr-namespace:MonkeyFinder2.View"
              xmlns:helpers="clr-namespace:MonkeyFinder2.Helpers"
+             xmlns:local="clr-namespace:MonkeyFinder2"
              Title="Monkeys"
              x:Name="shell"
              FlyoutBackgroundColor="Black"
@@ -53,12 +54,12 @@
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor" Value="Orange"/>
                                 <Setter TargetName="Label" Property="Label.TextColor" Value="Black"/>
-                                <!--<Setter TargetName="Image" Property="" Value="Black" />-->
+                                <Setter TargetName="Image" Property="local:FontIconImage.FontIconColor" Value="Black" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
-                <Image x:Name="Image"
+                <local:FontIconImage x:Name="Image"
                        Source="{Binding FlyoutIcon}"
                        Margin="5"
                        HeightRequest="45"/>
